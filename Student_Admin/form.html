@@ -6,18 +6,24 @@
     <title>Student-Form</title>
   </head>
   <body>
+    <div id="back">
+      <a href="./index.html">Back</a>
+    </div>
+
     <form>
-      <label for="fname">First Name (required):</label>
-      <input id="fname" name="fname" /> <br />
-      <label for="lname">Last Name (required):</label>
-      <input id="lname" name="lname" /><br />
-      <label for="age">Age (required):</label>
-      <input id="age" name="age" /> <br />
-      <label for="course">Course (required):</label>
-      <input id="course" name="course" /> <br />
-      <label for="score">Score (required):</label>
-      <input id="score" name="score" /> <br />
-      <div><button>Add Student</button></div>
+      <label for="fname">First Name* :</label>
+      <input type="text" id="fname" name="fname" /> <br />
+      <label for="lname">Last Name* :</label>
+      <input type="text" id="lname" name="lname" /><br />
+      <label for="age">Age* :</label>
+      <input type="number" id="age" name="age" /> <br />
+      <label for="course">Course* :</label>
+      <input type="text" id="course" name="course" /> <br />
+      <label for="score">Score* :</label>
+      <input type="number" id="score" name="score" /> <br />
+      <div><button id="add-btn">Add Student</button></div>
     </form>
+
+    <script src="./app.js"></script>
   </body>
 </html>
