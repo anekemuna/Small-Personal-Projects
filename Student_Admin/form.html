@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
     <title>Student-Form</title>
   </head>
   <body>
@@ -11,19 +12,23 @@
     </div>
 
     <form>
-      <label for="fname">First Name* :</label>
+      <label for="fname"
+        >First Name <span class="required-sym">* </span> :</label
+      >
       <input type="text" id="fname" name="fname" /> <br />
-      <label for="lname">Last Name* :</label>
+      <label for="lname"
+        >Last Name <span class="required-sym">* </span> :</label
+      >
       <input type="text" id="lname" name="lname" /><br />
-      <label for="age">Age* :</label>
+      <label for="age">Age <span class="required-sym">* </span> :</label>
       <input type="number" id="age" name="age" /> <br />
-      <label for="course">Course* :</label>
+      <label for="course">Course <span class="required-sym">* </span> :</label>
       <input type="text" id="course" name="course" /> <br />
-      <label for="score">Score* :</label>
+      <label for="score">Score <span class="required-sym">* </span> :</label>
       <input type="number" id="score" name="score" /> <br />
       <div><button id="add-btn">Add Student</button></div>
     </form>
 
-    <script src="./app.js"></script>
+    <script src="./app.js" defer></script>
   </body>
 </html>

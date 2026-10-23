@@ -7,8 +7,12 @@
 } */
 
 div {
-border-style: solid;
-border-color: red;
-border-width: 3px;
-margin-bottom: 9px;
+  border-style: solid;
+  border-color: red;
+  border-width: 3px;
+  margin-bottom: 9px;
+}
+
+.required-sym {
+  color: red;
 }

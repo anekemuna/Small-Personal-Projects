@@ -26,7 +26,11 @@ const students = [
   },
 ];
 
-localStorage.setItem("studentsList", JSON.stringify(students));
+// set local storage (once)
+const listOfStudents = localStorage.getItem("studentsList");
+if (!listOfStudents) {
+  localStorage.setItem("studentsList", JSON.stringify(students));
+}
 
 const table = document.body.querySelector("table");
 
@@ -38,6 +42,9 @@ const scoreInput = document.body.querySelector("#score");
 
 const addButton = document.body.querySelector("#add-btn");
 
+/* Index Script */
+
+// prepopulate record rows (DOM manipulation)
 function addNewRow(student) {
   const newRow = document.createElement("tr");
   const tdID = document.createElement("td");
@@ -64,11 +71,21 @@ function addNewRow(student) {
   newRow.appendChild(tdEdit);
   newRow.appendChild(tdDelete);
 
-  table.appendChild(newRow);
+  table?.appendChild(newRow); // "?" used to prevent acess when the element doesnt eexist
 }
 
-// students.map(addNewRow);
+// Add rows of students from local storage
+function reloadStudents() {
+  const currentStudents =
+    JSON.parse(localStorage.getItem("studentsList")) || [];
+  currentStudents.map(addNewRow);
+}
 
+reloadStudents();
+
+/* Form Script */
+
+// adds a new student
 function handleAddClick(e) {
   e.preventDefault();
 
@@ -92,8 +109,11 @@ function handleAddClick(e) {
     ? scoreInput.value
     : alert("Score field cannot be empty");
 
+  const currentStudents =
+    JSON.parse(localStorage.getItem("studentsList")) || [];
+
   const newStudent = {
-    id: students.length + 1,
+    id: currentStudents.length + 1,
     fname: fname,
     lname: lname,
     age: age,
@@ -101,19 +121,26 @@ function handleAddClick(e) {
     score: score,
   };
 
-  const currentStudents =
-    JSON.parse(localStorage.getItem("studentsList")) || [];
-
   currentStudents.push(newStudent);
 
   localStorage.setItem("studentsList", JSON.stringify(currentStudents));
-  
+
   console.log(newStudent);
+  //checkLocalStorage("studentsList");
   alert("Student Added Successfully!");
 
-  // TODO: Reset form inputs
-  // TODO 2: make data persistent - json or local storage
+  window.location.href = "./index.html";
+
+  reloadStudents();
+
   // TODO 3: Form validation
 }
 
-addButton.addEventListener("click", handleAddClick);
+addButton?.addEventListener("click", handleAddClick);
+
+/* Debugging Functions */
+
+function checkLocalStorage(storageKey) {
+  const item = JSON.parse(localStorage.getItem(storageKey)) || [];
+  console.log(item);
+}
