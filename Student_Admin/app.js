@@ -26,20 +26,24 @@ const students = [
   },
 ];
 
+const STORAGE_KEY = "studentsList";
+
 // set local storage (once)
-const listOfStudents = localStorage.getItem("studentsList");
+const listOfStudents = localStorage.getItem("STORAGE_KEY");
 if (!listOfStudents) {
-  localStorage.setItem("studentsList", JSON.stringify(students));
+  localStorage.setItem("STORAGE_KEY", JSON.stringify(students));
 }
 
+// DOM Variables
+// Index Variables
 const table = document.body.querySelector("table");
 
+// Form Variables
 const fnameInput = document.body.querySelector("#fname");
 const lnameInput = document.body.querySelector("#lname");
 const ageInput = document.body.querySelector("#age");
 const courseInput = document.body.querySelector("#course");
 const scoreInput = document.body.querySelector("#score");
-
 const addButton = document.body.querySelector("#add-btn");
 
 /* Index Script */
@@ -76,8 +80,7 @@ function addNewRow(student) {
 
 // Add rows of students from local storage
 function reloadStudents() {
-  const currentStudents =
-    JSON.parse(localStorage.getItem("studentsList")) || [];
+  const currentStudents = JSON.parse(localStorage.getItem("STORAGE_KEY")) || [];
   currentStudents.map(addNewRow);
 }
 
@@ -109,8 +112,7 @@ function handleAddClick(e) {
     ? scoreInput.value
     : alert("Score field cannot be empty");
 
-  const currentStudents =
-    JSON.parse(localStorage.getItem("studentsList")) || [];
+  const currentStudents = JSON.parse(localStorage.getItem("STORAGE_KEY")) || [];
 
   const newStudent = {
     id: currentStudents.length + 1,
@@ -123,10 +125,10 @@ function handleAddClick(e) {
 
   currentStudents.push(newStudent);
 
-  localStorage.setItem("studentsList", JSON.stringify(currentStudents));
+  localStorage.setItem("STORAGE_KEY", JSON.stringify(currentStudents));
 
   console.log(newStudent);
-  //checkLocalStorage("studentsList");
+  //checkLocalStorage("STORAGE_KEY");
   alert("Student Added Successfully!");
 
   window.location.href = "./index.html";
