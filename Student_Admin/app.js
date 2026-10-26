@@ -114,6 +114,7 @@ function handleDeleteClick(e) {
     console.log(currentStudents);
     removeStudents();
   }
+  calculateStats();
   reloadStudents();
 }
 
@@ -138,6 +139,39 @@ function handleEditCheck(e) {
   }
 }
 
+function calculateStats() {
+  const PASSMARK = 80;
+  const students = getFromLocalStorage(STORAGE_KEY);
+
+  const statTotal = document.body.querySelector("#stat_total");
+  const statAvg = document.body.querySelector("#stat_avg");
+  const statHigh = document.body.querySelector("#stat_high");
+  const statPassed = document.body.querySelector("#stat_passed");
+
+  statTotal.textContent = students.length;
+
+  const totalScore = students.reduce((acc, curr) => acc + +curr.score, 0);
+  console.log(totalScore);
+  const avg = totalScore / students.length;
+  console.log(avg);
+  statAvg.textContent = avg.toFixed(2);
+
+  statHigh.textContent = students.reduce(
+    (acc, curr) => Math.max(acc, curr.score),
+    0,
+  );
+
+  statPassed.textContent = students.reduce(
+    (acc, curr) => (curr.score >= PASSMARK ? acc + 1 : acc),
+    0,
+  );
+}
+
+// check it's index page
+if (ifIndexPage(window.location.pathname)) {
+  calculateStats();
+}
+
 /* Form Script */
 
 // check if in edit mode or not
@@ -155,8 +189,10 @@ function editMode(student) {
   }
 }
 
-// TODO: Need to put a conditional to prevent running on index page
-editMode(editStudent);
+// check it's not index page
+if (!ifIndexPage(window.location.pathname)) {
+  editMode(editStudent);
+}
 
 // adds a new student
 function handleAddClick(e) {
@@ -234,4 +270,10 @@ function getFromLocalStorage(storageKey) {
 
 function removeFromLocalStorage(storageKey) {
   localStorage.removeItem(storageKey);
+}
+
+function ifIndexPage(pathname) {
+  const pathArray = pathname.split("/");
+
+  return pathArray[pathArray.length - 1] === "index.html";
 }
