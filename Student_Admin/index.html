@@ -4,56 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student_DB</title>
-    <link rel="stylesheet" href="./index.css" />
-    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script> -->
+    <!-- <link rel="stylesheet" href="./index.css" /> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body>
-    <h1>Student DB</h1>
-    <div id="search">
-      <input type="text" id="search-bar" />
+  <body class="m-[30px]">
+    <h1 class="text-center text-2xl mb-4">Student DB</h1>
+    <div class="flex flex-col gap-8">
+      <div class="flex justify-between items-center">
 
-      <button id="search-btn">Search</button>
-    </div>
-    <div id="form">
-      <a href="./form.html">Add student</a>
-    </div>
-    <div id="stats">
-      <div>
-        Total Students
-        <span id="stat_total">X</span>
+      <div id="search" class="flex gap-4">
+        <input type="text" id="search-bar" class="bg-gray-200 ml-[15px] border-b-2 border-gray-400 rounded px-2 py-1 underline-offset-1 w-[300px]"/>
+        <button id="search-btn" class="bg-gray-400 hover:bg-gray-500 py-[10px] px-[20px] rounded-md text-black cursor-pointer">Search</button>
       </div>
-      <div>
-        Average Score
-        <span id="stat_avg">X</span>
+      <div id="form">
+        <a href="./form.html"><button class="bg-blue-400 hover:bg-blue-500 py-[10px] px-[20px] rounded-l text-white cursor-pointer">Add</button></a>
       </div>
-      <div>
-        Highest Score
-        <span id="stat_high">X</span>
       </div>
-      <div>
-        No of Passed Students
-        <span id="stat_passed">X</span>
+      <div id="stats" class="flex justify-between text-center">
+        <div class="border rounded-lg border-gray-100 p-[10px] bg-blue-300 text-white">
+          Total Students <br>
+          <span id="stat_total"  class="font-semibold italic text-lg" >X</span>
+        </div>
+        <div class="border rounded-lg border-gray-100 p-[10px] bg-blue-300 text-white">
+          Average Score <br>
+          <span id="stat_avg" class="font-semibold italic text-lg">X</span>
+        </div>
+        <div class="border rounded-lg border-gray-100 p-[10px] bg-blue-300 text-white">
+          Highest Score <br>
+          <span id="stat_high" class="font-semibold italic text-lg">X</span>
+        </div>
+        <div class="border rounded-lg border-gray-100 p-[10px] bg-blue-300 text-white">
+          No of Passed Students <br>
+          <span id="stat_passed" class="font-semibold italic text-lg">X</span>
+        </div>
       </div>
-    </div>
 
-    <div id="records">
-      <h4>Records</h4>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Course</th>
-            <th>Score</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+      <div id="records">
+        <h2 class="text-xl">Records</h2>
+        <table class="table-fixed w-full text-center border-collapse border border-gray-400">
+          <thead>
+            <tr>
+              <th class="border border-gray-400">ID</th>
+              <th class="border border-gray-400">Name</th>
+              <th class="border border-gray-400">Age</th>
+              <th class="border border-gray-400">Course</th>
+              <th class="border border-gray-400">Score</th>
+              <th class="border border-gray-400 "></th>
+              <th class="border border-gray-400 "></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </div>
-
     <script src="./app.js" defer></script>
   </body>
 </html>

@@ -71,11 +71,41 @@ function addNewRow(student, index) {
   tdAge.innerText = student.age;
   tdCourse.innerText = student.course;
   tdScore.innerText = student.score;
-  tdEdit.innerHTML = "<a><button>Edit</button></a>";
-  tdDelete.innerHTML = "<a><button>Delete</button></a>";
+  tdEdit.innerHTML =
+    "<button class='rounded-lg px-[25px] py-[5px] bg-slate-300 hover:bg-slate-400 text-white cursor-pointer'>Edit</button>";
+  tdDelete.innerHTML =
+    "<button class='rounded-lg px-[20px] py-[5px] bg-blue-300 hover:bg-blue-400 text-white cursor-pointer'>Delete</button>";
 
   tdEdit.addEventListener("click", handleEditClick);
   tdDelete.addEventListener("click", handleDeleteClick);
+
+  // Styling
+  tdID.style.cssText = `
+    border: 1px solid oklch(70.5% 0.015 286.067);
+  `;
+
+  tdName.style.cssText = `
+  border: 1px solid oklch(70.5% 0.015 286.067);`;
+  tdAge.style.cssText = `
+  border: 1px solid oklch(70.5% 0.015 286.067);`;
+  tdCourse.style.cssText = `
+  border: 1px solid oklch(70.5% 0.015 286.067);`;
+  tdScore.style.cssText = `
+  border: 1px solid oklch(70.5% 0.015 286.067);`;
+
+  tdEdit.style.cssText = `
+    border: 1px solid oklch(37.3% 0.034 259.733);
+    padding: 5px;
+    `;
+
+  //border-radius: 15px;
+  //padding
+  //background-color: oklch(70.5% 0.015 286.067);
+
+  tdDelete.style.cssText = `
+    border: 1px solid oklch(37.3% 0.034 259.733);
+    padding: 5px;
+  `;
 
   newRow.appendChild(tdID);
   newRow.appendChild(tdName);
