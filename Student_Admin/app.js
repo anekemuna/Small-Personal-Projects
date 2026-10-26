@@ -28,6 +28,7 @@ const students = [
 
 const STORAGE_KEY = "studentsList";
 const STUDENT = "editStudent";
+const STUDENT_INDEX = "editStudentIndex";
 
 // set local storage (once)
 const listOfStudents = getFromLocalStorage(STORAGE_KEY);
@@ -122,7 +123,7 @@ function handleEditCheck(e) {
     e.target.parentElement.parentElement.parentElement.firstElementChild
       .innerText;
 
-      console.log("ii" + ii);
+  console.log("ii" + ii);
 
   if (currentStudents.length) {
     const actualInd = ii - 1;
@@ -130,25 +131,11 @@ function handleEditCheck(e) {
     let student = currentStudents[actualInd];
 
     addToLocalStorage(STUDENT, student);
-  
+    addToLocalStorage(STUDENT_INDEX, actualInd);
 
-
-    console.log(student);
+    // console.log(student);
     window.location.href = "./form.html";
-    student = getFromLocalStorage(STUDENT)
-    console.log(student);
-    // fnameInput.value = student.fname;
-    // lnameInput.value = student.lname;
-    // ageInput.value = student.age;
-    // courseInput.value = student.course;
-    // scoreInput.value = student.score;
-    // TODO: Working on function
-
-    //addToLocalStorage(STORAGE_KEY, currentStudents);
-    //console.log(currentStudents);
-    //removeStudents();
   }
-  //reloadStudents();
 }
 
 /* Form Script */
@@ -157,20 +144,19 @@ function handleEditCheck(e) {
 const editStudent = getFromLocalStorage(STUDENT);
 
 function editMode(student) {
-  if(student) {
+  if (student) {
     fnameInput.value = student.fname;
     lnameInput.value = student.lname;
     ageInput.value = student.age;
     courseInput.value = student.course;
     scoreInput.value = student.score;
-    
+
     removeFromLocalStorage(STUDENT);
   }
-
 }
 
 // TODO: Need to put a conditional to prevent running on index page
-editMode(editStudent)
+editMode(editStudent);
 
 // adds a new student
 function handleAddClick(e) {
@@ -207,7 +193,14 @@ function handleAddClick(e) {
     score: score,
   };
 
-  currentStudents.push(newStudent);
+  const isEdit = getFromLocalStorage(STUDENT_INDEX);
+
+  if (isEdit != null) {
+    currentStudents[isEdit] = newStudent;
+    removeFromLocalStorage(STUDENT_INDEX);
+  } else {
+    currentStudents.push(newStudent);
+  }
 
   addToLocalStorage(STORAGE_KEY, currentStudents);
 
@@ -239,6 +232,6 @@ function getFromLocalStorage(storageKey) {
   return JSON.parse(localStorage.getItem(storageKey));
 }
 
-function removeFromLocalStorage(storageKey){
+function removeFromLocalStorage(storageKey) {
   localStorage.removeItem(storageKey);
 }
