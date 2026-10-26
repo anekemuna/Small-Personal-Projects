@@ -3,30 +3,75 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./index.css" />
+    <!-- <link rel="stylesheet" href="./index.css" /> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>Student-Form</title>
   </head>
-  <body>
+  <body class="m-[30px]">
     <div id="back">
-      <a href="./index.html">Back</a>
+      <a href="./index.html"
+        ><button class="bg-slate-100 hover:bg-slate-200 [10px] px-[20px] rounded-md cursor-pointer">
+          Back
+        </button></a
+      >
     </div>
 
-    <form>
-      <label for="fname"
-        >First Name <span class="required-sym">* </span> :</label
-      >
-      <input type="text" id="fname" name="fname" /> <br />
-      <label for="lname"
-        >Last Name <span class="required-sym">* </span> :</label
-      >
-      <input type="text" id="lname" name="lname" /><br />
-      <label for="age">Age <span class="required-sym">* </span> :</label>
-      <input type="number" id="age" name="age" /> <br />
-      <label for="course">Course <span class="required-sym">* </span> :</label>
-      <input type="text" id="course" name="course" /> <br />
-      <label for="score">Score <span class="required-sym">* </span> :</label>
-      <input type="number" id="score" name="score" /> <br />
-      <div><button id="add-btn">Add Student</button></div>
+    <form class="flex flex-col justify-center items-center gap-4">
+      <div class="flex flex-col justify-center border-1 border-gray-400 rounded-md gap-2 p-8 w-4/5 m-8">
+        <label for="fname"
+          >First Name <span class="required-sym">* </span> :</label
+        >
+        <input
+          type="text"
+          id="fname"
+          name="fname"
+          class="bg-gray-200 ml-[15px] border-b-2 border-gray-400 rounded px-2 py-1 underline-offset-1"
+        />
+        <br />
+        <label for="lname"
+          >Last Name <span class="required-sym">* </span> :</label
+        >
+        <input
+          type="text"
+          id="lname"
+          name="lname"
+          class="bg-gray-200 ml-[15px] border-b-2 border-gray-400 rounded px-2 py-1"
+        /><br />
+        <label for="age">Age <span class="required-sym">* </span> :</label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          class="bg-gray-200 ml-[15px] border-b-2 border-gray-400 rounded px-2 py-1"
+        />
+        <br />
+        <label for="course"
+          >Course <span class="required-sym">* </span> :</label
+        >
+        <input
+          type="text"
+          id="course"
+          name="course"
+          class="bg-gray-200 ml-[15px] border-b-2 border-gray-400 rounded px-2 py-1"
+        />
+        <br />
+        <label for="score">Score <span class="required-sym">* </span> :</label>
+        <input
+          type="number"
+          id="score"
+          name="score"
+          class="bg-gray-200 ml-[15px] border-b-2 border-gray-400 rounded px-2 py-1"
+        />
+        <br />
+      </div>
+      <div class="">
+        <button
+          id="add-btn"
+          class="bg-blue-400 hover:bg-blue-500 py-[10px] px-[20px] rounded-md text-white cursor-pointer"
+        >
+          Add Student
+        </button>
+      </div>
     </form>
 
     <script src="./app.js" defer></script>
