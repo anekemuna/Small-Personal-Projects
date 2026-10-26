@@ -27,13 +27,14 @@ const students = [
 ];
 
 const STORAGE_KEY = "studentsList";
+const STUDENT = "editStudent";
 
 // set local storage (once)
-const listOfStudents = localStorage.getItem(STORAGE_KEY);
+const listOfStudents = getFromLocalStorage(STORAGE_KEY);
 
 if (!listOfStudents) {
   console.log("here");
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(students));
+  addToLocalStorage(STORAGE_KEY, students);
 }
 
 // DOM Variables
@@ -70,6 +71,7 @@ function addNewRow(student, index) {
   tdEdit.innerHTML = "<a><button>Edit</button></a>";
   tdDelete.innerHTML = "<a><button>Delete</button></a>";
 
+  tdEdit.addEventListener("click", handleEditCheck);
   tdDelete.addEventListener("click", handleDeleteClick);
 
   newRow.appendChild(tdID);
@@ -85,7 +87,7 @@ function addNewRow(student, index) {
 
 // Add rows of students from local storage
 function reloadStudents() {
-  const currentStudents = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  const currentStudents = getFromLocalStorage(STORAGE_KEY) || [];
   currentStudents.map(addNewRow);
 }
 
@@ -96,9 +98,7 @@ function removeStudents() {
 reloadStudents();
 
 function handleDeleteClick(e) {
-  //e.preventDefault();
-
-  const currentStudents = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  const currentStudents = getFromLocalStorage(STORAGE_KEY) || [];
   const ii =
     e.target.parentElement.parentElement.parentElement.firstElementChild
       .innerText;
@@ -109,14 +109,68 @@ function handleDeleteClick(e) {
 
     currentStudents.splice(ii - 1, 1);
 
-    addToLocalStorage(currentStudents, STORAGE_KEY);
+    addToLocalStorage(STORAGE_KEY, currentStudents);
     console.log(currentStudents);
     removeStudents();
   }
   reloadStudents();
 }
 
+function handleEditCheck(e) {
+  const currentStudents = getFromLocalStorage(STORAGE_KEY) || [];
+  const ii =
+    e.target.parentElement.parentElement.parentElement.firstElementChild
+      .innerText;
+
+      console.log("ii" + ii);
+
+  if (currentStudents.length) {
+    const actualInd = ii - 1;
+    console.log(actualInd);
+    let student = currentStudents[actualInd];
+
+    addToLocalStorage(STUDENT, student);
+  
+
+
+    console.log(student);
+    window.location.href = "./form.html";
+    student = getFromLocalStorage(STUDENT)
+    console.log(student);
+    // fnameInput.value = student.fname;
+    // lnameInput.value = student.lname;
+    // ageInput.value = student.age;
+    // courseInput.value = student.course;
+    // scoreInput.value = student.score;
+    // TODO: Working on function
+
+    //addToLocalStorage(STORAGE_KEY, currentStudents);
+    //console.log(currentStudents);
+    //removeStudents();
+  }
+  //reloadStudents();
+}
+
 /* Form Script */
+
+// check if in edit mode or not
+const editStudent = getFromLocalStorage(STUDENT);
+
+function editMode(student) {
+  if(student) {
+    fnameInput.value = student.fname;
+    lnameInput.value = student.lname;
+    ageInput.value = student.age;
+    courseInput.value = student.course;
+    scoreInput.value = student.score;
+    
+    removeFromLocalStorage(STUDENT);
+  }
+
+}
+
+// TODO: Need to put a conditional to prevent running on index page
+editMode(editStudent)
 
 // adds a new student
 function handleAddClick(e) {
@@ -142,7 +196,7 @@ function handleAddClick(e) {
     ? scoreInput.value
     : alert("Score field cannot be empty");
 
-  const currentStudents = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  const currentStudents = getFromLocalStorage(STORAGE_KEY) || [];
 
   const newStudent = {
     id: currentStudents.length + 1,
@@ -155,7 +209,7 @@ function handleAddClick(e) {
 
   currentStudents.push(newStudent);
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(currentStudents));
+  addToLocalStorage(STORAGE_KEY, currentStudents);
 
   console.log(newStudent);
   //checkLocalStorage(STORAGE_KEY);
@@ -165,7 +219,7 @@ function handleAddClick(e) {
 
   reloadStudents();
 
-  // TODO 3: Form validation
+  // TODO: Form validation
 }
 
 addButton?.addEventListener("click", handleAddClick);
@@ -177,6 +231,14 @@ function checkLocalStorage(storageKey) {
   console.log(item);
 }
 
-function addToLocalStorage(item, storageKey) {
+function addToLocalStorage(storageKey, item) {
   localStorage.setItem(storageKey, JSON.stringify(item));
+}
+
+function getFromLocalStorage(storageKey) {
+  return JSON.parse(localStorage.getItem(storageKey));
+}
+
+function removeFromLocalStorage(storageKey){
+  localStorage.removeItem(storageKey);
 }
