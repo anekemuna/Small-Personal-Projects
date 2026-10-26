@@ -297,7 +297,7 @@ function handleAddClick(e) {
   // TODO: Form validation
 }
 
-addButton?.addEventListener("click", handleAddClick);
+addButton?.addEventListener("submit", handleAddClick);
 
 /* Debugging & Helper Functions */
 
