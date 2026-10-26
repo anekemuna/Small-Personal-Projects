@@ -42,6 +42,8 @@ if (!listOfStudents) {
 // Index Variables
 const table = document.body.querySelector("table");
 const tableBody = document.body.querySelector("tbody");
+const searchBar = document.body.querySelector("#search-bar");
+const searchButton = document.body.querySelector("#search-btn");
 
 // Form Variables
 const fnameInput = document.body.querySelector("#fname");
@@ -72,7 +74,7 @@ function addNewRow(student, index) {
   tdEdit.innerHTML = "<a><button>Edit</button></a>";
   tdDelete.innerHTML = "<a><button>Delete</button></a>";
 
-  tdEdit.addEventListener("click", handleEditCheck);
+  tdEdit.addEventListener("click", handleEditClick);
   tdDelete.addEventListener("click", handleDeleteClick);
 
   newRow.appendChild(tdID);
@@ -96,8 +98,6 @@ function removeStudents() {
   tableBody.replaceChildren();
 }
 
-reloadStudents();
-
 function handleDeleteClick(e) {
   const currentStudents = getFromLocalStorage(STORAGE_KEY) || [];
   const ii =
@@ -118,7 +118,7 @@ function handleDeleteClick(e) {
   reloadStudents();
 }
 
-function handleEditCheck(e) {
+function handleEditClick(e) {
   const currentStudents = getFromLocalStorage(STORAGE_KEY) || [];
   const ii =
     e.target.parentElement.parentElement.parentElement.firstElementChild
@@ -137,6 +137,13 @@ function handleEditCheck(e) {
     // console.log(student);
     window.location.href = "./form.html";
   }
+}
+
+function handleSearchClick(e) {
+  const students = getFromLocalStorage(STORAGE_KEY);
+  const newStudents = filterItems(students, searchBar.value);
+  removeStudents();
+  newStudents.map(addNewRow);
 }
 
 function calculateStats() {
@@ -167,10 +174,19 @@ function calculateStats() {
   );
 }
 
+function filterItems(students, query) {
+  return students.filter((student) =>
+    student.fname.toLowerCase().includes(query.toLowerCase()),
+  );
+}
+
 // check it's index page
 if (ifIndexPage(window.location.pathname)) {
   calculateStats();
+  reloadStudents();
 }
+
+searchButton?.addEventListener("click", handleSearchClick);
 
 /* Form Script */
 
