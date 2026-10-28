@@ -1,6 +1,7 @@
 # Student Admin
 
 ## Description
+A Simple Student Admin written with vanilla JS
 
 
 ## Tools
